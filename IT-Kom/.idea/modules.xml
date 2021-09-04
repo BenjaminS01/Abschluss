@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Accountverwaltung/Accountverwaltung.iml" filepath="$PROJECT_DIR$/Accountverwaltung/Accountverwaltung.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/ApiGateway.iml" filepath="$PROJECT_DIR$/ApiGateway/ApiGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/Firmenverwaltung/Firmenverwaltung.iml" filepath="$PROJECT_DIR$/Firmenverwaltung/Firmenverwaltung.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/IT-Kom.iml" filepath="$PROJECT_DIR$/.idea/IT-Kom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Vortragsverwaltung/Vortragsverwaltung.iml" filepath="$PROJECT_DIR$/Vortragsverwaltung/Vortragsverwaltung.iml" />
       <module fileurl="file://$PROJECT_DIR$/serviceDiscover/serviceDiscover.iml" filepath="$PROJECT_DIR$/serviceDiscover/serviceDiscover.iml" />
     </modules>
   </component>
