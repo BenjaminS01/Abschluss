@@ -6,10 +6,7 @@ import com.example.Accountverwaltung.Service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,6 +26,14 @@ public class AccountController {
         AccountDto accountDto = modelMapper.map(accountDeatails, AccountDto.class);
 
         return "test";
+    }
+
+    @GetMapping("/show")
+    @ResponseBody
+    public String show() {
+
+        return "show";
+
     }
 
 }

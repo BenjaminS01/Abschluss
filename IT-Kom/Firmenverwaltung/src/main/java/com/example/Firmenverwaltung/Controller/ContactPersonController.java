@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@RequestMapping("/ansprechpartner")
+@RequestMapping("/contactPerson")
 public class ContactPersonController {
-
+/*
     @Autowired
     ContactPersonRepository contactPersonRepository;
-
+*/
     @GetMapping("/test/check")
     @ResponseBody
-    public String test() {
+    public String blubb() {
 
-            return "Keine Person mit dieser Id gefunden :-(";
+        return "Keine Person mit dieser Id gefunden :-(";
 
-        }
+    }
+
 
 }

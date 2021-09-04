@@ -5,9 +5,9 @@
       <list>
         <option value="$PROJECT_DIR$/serviceDiscover/pom.xml" />
         <option value="$PROJECT_DIR$/Firmenverwaltung/pom.xml" />
-        <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Vortragsverwaltung/pom.xml" />
         <option value="$PROJECT_DIR$/Accountverwaltung/pom.xml" />
+        <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
       </list>
     </option>
   </component>
