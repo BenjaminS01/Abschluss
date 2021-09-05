@@ -34,6 +34,8 @@ public class AccountServiceImpl implements AccountService{
 
         accountRepository.save(accountEntity);
 
-        return null;
+        AccountDto returnValue = modelMapper.map(accountEntity, AccountDto.class);
+
+        return returnValue;
     }
 }
