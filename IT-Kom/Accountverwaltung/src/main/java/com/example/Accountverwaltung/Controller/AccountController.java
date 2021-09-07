@@ -7,6 +7,7 @@ import com.example.Accountverwaltung.Service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
+
+    @Autowired
+    Environment env;
 
     @Autowired
     AccountService accountService;
