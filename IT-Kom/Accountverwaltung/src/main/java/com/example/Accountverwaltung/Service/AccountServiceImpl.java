@@ -5,9 +5,7 @@ import com.example.Accountverwaltung.Data.AccountRepository;
 import com.example.Accountverwaltung.Dto.AccountDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,7 +32,7 @@ public class AccountServiceImpl implements AccountService{
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         AccountEntity accountEntity = modelMapper.map(accountDetails, AccountEntity.class);
-        accountEntity.setEncrryptedPasword("test");
+        accountEntity.setEncryptedPassword("test");
 
         accountRepository.save(accountEntity);
 
@@ -58,7 +56,7 @@ public class AccountServiceImpl implements AccountService{
 
         if(accountEntity == null) throw new UsernameNotFoundException(username);
 
-        return new User(accountEntity.getUsername(), accountEntity.getEncrryptedPasword(),true, true, true, true, new ArrayList<>());
+        return new User(accountEntity.getUsername(), accountEntity.getEncryptedPassword(),true, true, true, true, new ArrayList<>());
     }
 
 

@@ -16,7 +16,7 @@ public class AccountEntity implements Serializable {
     private String username;
 
     @Column(nullable = false)
-    private String encrryptedPasword;
+    private String encryptedPassword;
 
     @Column(nullable = false)
     private String accountId;
@@ -47,11 +47,11 @@ public class AccountEntity implements Serializable {
         this.accountId = accountId;
     }
 
-    public String getEncrryptedPasword() {
-        return encrryptedPasword;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
-    public void setEncrryptedPasword(String encrryptedPasword) {
-        this.encrryptedPasword = encrryptedPasword;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 }

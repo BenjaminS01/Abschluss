@@ -9,6 +9,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/account")
 public class AccountController {
 
@@ -26,8 +27,8 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @PostMapping("/register")
-    public String createAccont(@Valid  CreateAccountRequestModel accountDetails, Model model){
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<CreateAccountResponseModel> createAccont(@RequestBody  CreateAccountRequestModel accountDetails, Model model){
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -37,7 +38,7 @@ public class AccountController {
 
         CreateAccountResponseModel returnValue = modelMapper.map(createdAccount, CreateAccountResponseModel.class);
 
-        return "redirect:/account/register";
+        return /*"redirect:/account/register"*/ ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
     }
 
     @GetMapping("/register")

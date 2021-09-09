@@ -64,7 +64,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .compact();
 
         response.addHeader("token", token);
-        response.addHeader("userId", accountDetails.getAccountId());
+        response.addHeader("accountId", accountDetails.getAccountId());
 
     }
 

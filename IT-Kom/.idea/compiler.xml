@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Besucher" />
         <module name="Vortragsverwaltung" />
         <module name="Accountverwaltung" />
         <module name="serviceDiscover" />
@@ -16,6 +17,7 @@
     <bytecodeTargetLevel>
       <module name="Accountverwaltung" target="1.8" />
       <module name="ApiGateway" target="1.8" />
+      <module name="Besucher" target="1.8" />
       <module name="Firmenverwaltung" target="1.8" />
       <module name="serviceDiscover" target="1.8" />
       <module name="Vortragsverwaltung" target="1.8" />
@@ -25,6 +27,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Accountverwaltung" options="-parameters" />
       <module name="ApiGateway" options="-parameters" />
+      <module name="Besucher" options="-parameters" />
       <module name="Firmenverwaltung" options="-parameters" />
       <module name="Vortragsverwaltung" options="-parameters" />
       <module name="serviceDiscover" options="-parameters" />
