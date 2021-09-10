@@ -1,6 +1,12 @@
 package com.example.Besucher.Controller;
 
 
+import com.example.Besucher.Model.CompanieData;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +26,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Controller
@@ -41,13 +50,28 @@ public class guestController {
     }
 
     @GetMapping("/test")
-    @ResponseBody
-    public String test() {
+    public String test(Model model) throws JSONException {
+
+       List<CompanieData> companieData = new ArrayList<>();
+
+        String companiesStr = getCompanies();
+        JSONArray companiesArray = new JSONArray(companiesStr);
+
+        for(int i=0; i < companiesArray.length(); i++)
+        {
+            JSONObject object = companiesArray.getJSONObject(i);
+
+            CompanieData companie = new CompanieData();
+            companie.setCommpanyName(object.getString("commpanyName"));
+            companie.setTakesPart(object.getString("takesPart"));
+            companie.setLogoPath(object.getString("logoPath"));
+
+            companieData.add(companie);
 
 
-
-
-        return  getCompanies();
+        }
+        model.addAttribute("companies", companieData);
+        return  "start";
 
     }
 
@@ -74,7 +98,7 @@ public class guestController {
       //  HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
-        return response.toString();
+        return response.getBody().toString();
     }
 
 
