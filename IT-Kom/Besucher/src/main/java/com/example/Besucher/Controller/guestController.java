@@ -55,6 +55,10 @@ public class guestController {
        List<CompanieData> companieData = new ArrayList<>();
 
         String companiesStr = getCompanies();
+        if(companiesStr == null){
+            model.addAttribute("companies", companieData);
+            return "start";
+        }
         JSONArray companiesArray = new JSONArray(companiesStr);
 
         for(int i=0; i < companiesArray.length(); i++)
@@ -96,7 +100,14 @@ public class guestController {
       //  String result = restTemplate.getForObject(uri, String.class);
 
       //  HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
+        ResponseEntity<String> response = null;
+        try {
+             response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+        }
+        catch(Exception e){
+            return null;
+        }
 
         return response.getBody().toString();
     }
