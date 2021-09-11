@@ -7,11 +7,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
@@ -21,13 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -39,25 +31,22 @@ public class guestController {
 
 
     @GetMapping("/")
-    @ResponseBody
-    public String  allCompaniess(@AuthenticationPrincipal Jwt jwt) {
+    public String  home(Model model) {
 
 
-
-
-        return  "getCompanies(jwt)";
+        return  "start";
 
     }
 
-    @GetMapping("/test")
-    public String test(Model model) throws JSONException {
+    @GetMapping("/firmen")
+    public String companies(Model model) throws JSONException {
 
        List<CompanieData> companieData = new ArrayList<>();
 
         String companiesStr = getCompanies();
         if(companiesStr == null){
             model.addAttribute("companies", companieData);
-            return "start";
+            return "firmen";
         }
         JSONArray companiesArray = new JSONArray(companiesStr);
 
@@ -65,17 +54,17 @@ public class guestController {
         {
             JSONObject object = companiesArray.getJSONObject(i);
 
-            CompanieData companie = new CompanieData();
-            companie.setCommpanyName(object.getString("commpanyName"));
-            companie.setTakesPart(object.getString("takesPart"));
-            companie.setLogoPath(object.getString("logoPath"));
+            CompanieData company = new CompanieData();
+            company.setCompanyName(object.getString("companyName"));
+            company.setTakesPart(object.getString("takesPart"));
+            company.setLogoPath(object.getString("logoPath"));
 
-            companieData.add(companie);
+            companieData.add(company);
 
 
         }
         model.addAttribute("companies", companieData);
-        return  "start";
+        return  "firmen";
 
     }
 

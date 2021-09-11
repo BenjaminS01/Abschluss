@@ -2,17 +2,17 @@ package com.example.Besucher.Model;
 
 public class CompanieData {
 
-    private String commpanyName;
+    private String companyName;
     private String takesPart;
     private String logoPath;
 
 
-    public String getCommpanyName() {
-        return commpanyName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCommpanyName(String commpanyName) {
-        this.commpanyName = commpanyName;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String takesPart() {

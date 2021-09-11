@@ -19,12 +19,14 @@
                 <a class="nav-link" href="/ai-it-kom">Start <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/firmenverwaltung/">Firmendaten</a>
+                <a class="nav-link" href="/ai-it-kom/firmen">Firmen</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/company}">Vortrgsplanung</a>
+                <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/vorträge}">Vorträge</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/}">Firmenverwaltung</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -39,8 +41,10 @@
     </tr>
     </thead>
     <tbody>
-
-    <tr>
+    <tr th:if="${companies.empty}">
+        <td colspan="2"> No Books Available </td>
+    </tr>
+    <tr th:each="company : ${companies}">
         <td><span th:text="${company.companyName}"> Title </span></td>
         <td><span th:text="${company.takesPart}"> Author </span></td>
         <td><span th:text="${company.logoPath}"> Author </span></td>

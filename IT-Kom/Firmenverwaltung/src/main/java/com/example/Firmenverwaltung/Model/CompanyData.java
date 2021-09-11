@@ -12,7 +12,9 @@ public class CompanyData {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String commpanyName;
+    private String subject;
+
+    private String companyName;
     private boolean takesPart;
     private String logoPath;
 
@@ -24,12 +26,12 @@ public class CompanyData {
         this.id = id;
     }
 
-    public String getCommpanyName() {
-        return commpanyName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCommpanyName(String commpanyName) {
-        this.commpanyName = commpanyName;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public boolean isTakesPart() {
@@ -46,5 +48,13 @@ public class CompanyData {
 
     public void setLogoPath(String logoPath) {
         this.logoPath = logoPath;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
