@@ -7,10 +7,11 @@
     <file url="file://$PROJECT_DIR$/ApiGateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Besucher/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Besucher/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DiscoveryService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DiscoveryService/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Firmenverwaltung/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Firmenverwaltung/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Vortragsverwaltung/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Vortragsverwaltung/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/serviceDiscover/src/main/java" charset="UTF-8" />
   </component>
 </project>
