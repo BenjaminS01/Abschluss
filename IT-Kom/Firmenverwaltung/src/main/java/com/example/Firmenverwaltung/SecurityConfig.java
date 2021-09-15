@@ -16,3 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
 }
+
+   // .antMatchers("/create").hasRole("Firma")
+    //        .and()
+
+//authorize -> authorize.anyRequest().authenticated()
