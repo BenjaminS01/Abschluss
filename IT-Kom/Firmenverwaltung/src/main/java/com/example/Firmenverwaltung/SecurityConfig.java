@@ -12,7 +12,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity security) throws Exception {
-        security.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
+        security.authorizeRequests()
+                .antMatchers("/create").authenticated()
+                .antMatchers("/").authenticated()
+                .antMatchers("/allCompanies").permitAll()
+                .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
 }

@@ -14,7 +14,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
+        http.authorizeExchange()
+                .pathMatchers("/ai-it-kom/**").permitAll()
+                .pathMatchers("/firmenverwaltung/").authenticated()
+                .pathMatchers("/firmenverwaltung/create").authenticated()
+                .pathMatchers("/firmenverwaltung/allCompanies").permitAll()
+
+                .and()
                 .oauth2Login(withDefaults())
                 .oauth2Client();
         http.csrf().disable();

@@ -76,7 +76,7 @@ public class guestController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("cookie", "SESSION="+session[0].getValue());
+//        headers.set("cookie", "SESSION="+session[0].getValue());
 
 
       //  RestTemplate restTemplate = new RestTemplate();
