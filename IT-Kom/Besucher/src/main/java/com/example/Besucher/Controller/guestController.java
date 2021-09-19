@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -26,8 +29,13 @@ import java.util.List;
 @Controller
 public class guestController {
 
+    @Autowired
+    @LoadBalanced
+    RestTemplate restTemplate;
 
     private static final String API_URL = "http://localhost:8081";
+
+
 
 
     @GetMapping("/")
@@ -68,7 +76,7 @@ public class guestController {
 
     }
 
-    private static String getCompanies( )
+    private String getCompanies( )
     {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         Cookie[] session = attr.getRequest().getCookies();
@@ -79,20 +87,19 @@ public class guestController {
 //        headers.set("cookie", "SESSION="+session[0].getValue());
 
 
-      //  RestTemplate restTemplate = new RestTemplate();
+      //
         HttpEntity<String> entity = new HttpEntity<String>("access_token",headers);
-     //   String result = restTemplate.postForObject(url, entity, String.class);
 
         final String uri = "http://localhost:8081/firmenverwaltung/allCompanies";
 
         RestTemplate restTemplate = new RestTemplate();
-      //  String result = restTemplate.getForObject(uri, String.class);
-
-      //  HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
         ResponseEntity<String> response = null;
+
+        response = getRestTemplate().exchange(uri, HttpMethod.GET, entity, String.class);
+
         try {
-             response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+
         }
         catch(Exception e){
             return null;
@@ -101,5 +108,9 @@ public class guestController {
         return response.getBody().toString();
     }
 
-
+    @Bean
+    @LoadBalanced
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
 }
