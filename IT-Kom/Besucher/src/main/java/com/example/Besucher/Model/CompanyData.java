@@ -1,6 +1,6 @@
 package com.example.Besucher.Model;
 
-public class CompanieData {
+public class CompanyData {
 
     private String companyName;
     private String takesPart;
