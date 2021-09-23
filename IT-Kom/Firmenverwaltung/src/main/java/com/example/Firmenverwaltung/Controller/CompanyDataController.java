@@ -75,7 +75,9 @@ public class CompanyDataController {
 
     @GetMapping("/allCompanies")
     @ResponseBody
-    public ResponseEntity <List<CompanyData>> allCompanies() {
+    public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
+
+        Thread.sleep(4000);
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDataList);

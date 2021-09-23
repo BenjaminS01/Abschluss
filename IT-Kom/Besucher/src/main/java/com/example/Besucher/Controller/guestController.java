@@ -3,12 +3,21 @@ package com.example.Besucher.Controller;
 
 import com.example.Besucher.Client.FirmenverwaltungServiceClient;
 import com.example.Besucher.Model.CompanyData;
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import io.vavr.control.Try;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreaker;
+import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
@@ -20,10 +29,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.Cookie;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-
+@RequiredArgsConstructor
 @Controller
 public class guestController {
 
@@ -36,6 +49,9 @@ public class guestController {
 
     private static final String API_URL = "http://localhost:8081";
 
+
+
+
     @GetMapping("/")
     public String  home(Model model) {
 
@@ -47,7 +63,74 @@ public class guestController {
     @GetMapping("/firmen")
     public String companies(Model model) throws JSONException {
 
-       List<CompanyData> companieData = new ArrayList<>();
+
+        List<CompanyData> companieData = new ArrayList<>();
+
+
+
+/*
+        Resilience4JCircuitBreaker circuitBreaker = circuitBreakerFactory.create("inventory");
+        java.util.function.Supplier<List<CompanyData>> booleanSupplier = () -> firmenverwaltungServiceClient.allCompanies().stream().allMatch();
+
+        List<CompanyData> finalCompanieData = companieData;
+        companieData = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
+
+
+ */
+
+        CircuitBreakerRegistry circuitBreakerRegistry
+                = CircuitBreakerRegistry.ofDefaults();
+
+        CircuitBreakerConfig config = CircuitBreakerConfig.custom()
+                .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)
+                .slidingWindowSize(5)
+                .slowCallRateThreshold(65.0f)
+                .slowCallDurationThreshold(Duration.ofSeconds(1))
+                .build();
+
+
+        CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config);
+        CircuitBreaker circuitBreaker = registry.circuitBreaker("my");
+
+
+        Supplier<List<CompanyData>> flightsSupplier =
+                () -> firmenverwaltungServiceClient.allCompanies();
+        Supplier<List<CompanyData>> decoratedFlightsSupplier =
+                circuitBreaker.decorateSupplier(flightsSupplier);
+        for (int i = 1; i < 11; i++){
+            try {
+                System.out.println(decoratedFlightsSupplier.get());
+                companieData = decoratedFlightsSupplier.get();
+
+                model.addAttribute("companies", companieData);
+            } catch (CallNotPermittedException e) {
+                System.out.println(e.getMessage());
+                CompanyData companyData1 = new CompanyData();
+                companyData1.setCompanyName("null..");
+                companyData1.setLogoPath("....");
+                companyData1.setTakesPart("...");
+
+                companieData.add(companyData1);
+
+                model.addAttribute("companies", companieData);
+
+                return "firmen";
+            }
+        }
+
+     /*   Supplier<String> decoratedSupplier = CircuitBreaker
+                .decorateSupplier(circuitBreaker, test(model));
+
+        String result = Try.ofSupplier(decoratedSupplier)
+                .recover(throwable -> "Hello from Recovery").get();
+
+
+      */
+
+       // companieData = new ArrayList<>();
+
+
+
 
        /*
         String companiesStr = getCompanies();
@@ -73,9 +156,9 @@ public class guestController {
 
         */
 
-        companieData = firmenverwaltungServiceClient.allCompanies();
+   //     companieData = firmenverwaltungServiceClient.allCompanies();
 
-        model.addAttribute("companies", companieData);
+      //  model.addAttribute("companies", companieData);
         return  "firmen";
 
     }
@@ -120,5 +203,19 @@ public class guestController {
 
 
  */
+
+    List<CompanyData> test(Model model){
+
+        List<CompanyData> _companieData = firmenverwaltungServiceClient.allCompanies();
+
+        model.addAttribute("companies", _companieData);
+
+        return _companieData;
+    }
+
+    private List<CompanyData> handleErrorCase() {
+        List<CompanyData> companieData2 = null;
+        return companieData2;
+    }
 
 }
