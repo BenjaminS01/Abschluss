@@ -86,7 +86,6 @@ public class guestController {
                 .slowCallDurationThreshold(Duration.ofSeconds(1))
                 .build();
 
-
         CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config);
         CircuitBreaker circuitBreaker = registry.circuitBreaker("test");
 
