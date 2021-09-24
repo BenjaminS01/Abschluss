@@ -64,7 +64,7 @@ public class guestController {
     public String companies(Model model) throws JSONException {
 
 
-        List<CompanyData> companieData = new ArrayList<>();
+        List<CompanyData> companies = new ArrayList<>();
 
 
 
@@ -72,51 +72,46 @@ public class guestController {
         Resilience4JCircuitBreaker circuitBreaker = circuitBreakerFactory.create("inventory");
         java.util.function.Supplier<List<CompanyData>> booleanSupplier = () -> firmenverwaltungServiceClient.allCompanies().stream().allMatch();
 
-        List<CompanyData> finalCompanieData = companieData;
-        companieData = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
+        List<CompanyData> finalCompanieData = companies;
+        companies = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
 
 
  */
 
-        CircuitBreakerRegistry circuitBreakerRegistry
-                = CircuitBreakerRegistry.ofDefaults();
 
         CircuitBreakerConfig config = CircuitBreakerConfig.custom()
                 .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)
-                .slidingWindowSize(5)
-                .slowCallRateThreshold(65.0f)
+                .slidingWindowSize(3)
+                .slowCallRateThreshold(50.0f)
                 .slowCallDurationThreshold(Duration.ofSeconds(1))
                 .build();
 
 
         CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config);
-        CircuitBreaker circuitBreaker = registry.circuitBreaker("my");
+        CircuitBreaker circuitBreaker = registry.circuitBreaker("test");
 
 
-        Supplier<List<CompanyData>> flightsSupplier =
+        Supplier<List<CompanyData>> companyDataSupplier =
                 () -> firmenverwaltungServiceClient.allCompanies();
-        Supplier<List<CompanyData>> decoratedFlightsSupplier =
-                circuitBreaker.decorateSupplier(flightsSupplier);
+        Supplier<List<CompanyData>> decoratedCompanyDataSupplier =
+                circuitBreaker.decorateSupplier(companyDataSupplier);
+
         for (int i = 1; i < 11; i++){
             try {
-                System.out.println(decoratedFlightsSupplier.get());
-                companieData = decoratedFlightsSupplier.get();
 
-                model.addAttribute("companies", companieData);
+                companies = decoratedCompanyDataSupplier.get();
+                System.out.println(companies.get(0).getCompanyName());
+
             } catch (CallNotPermittedException e) {
+
                 System.out.println(e.getMessage());
-                CompanyData companyData1 = new CompanyData();
-                companyData1.setCompanyName("null..");
-                companyData1.setLogoPath("....");
-                companyData1.setTakesPart("...");
+                companies.clear();
 
-                companieData.add(companyData1);
-
-                model.addAttribute("companies", companieData);
-
-                return "firmen";
+                break;
             }
         }
+        model.addAttribute("companies", companies);
+        return  "firmen";
 
      /*   Supplier<String> decoratedSupplier = CircuitBreaker
                 .decorateSupplier(circuitBreaker, test(model));
@@ -127,7 +122,7 @@ public class guestController {
 
       */
 
-       // companieData = new ArrayList<>();
+       // companies = new ArrayList<>();
 
 
 
@@ -135,7 +130,7 @@ public class guestController {
        /*
         String companiesStr = getCompanies();
         if(companiesStr == null){
-            model.addAttribute("companies", companieData);
+            model.addAttribute("companies", companies);
             return "firmen";
         }
         JSONArray companiesArray = new JSONArray(companiesStr);
@@ -149,17 +144,17 @@ public class guestController {
             company.setTakesPart(object.getString("takesPart"));
             company.setLogoPath(object.getString("logoPath"));
 
-            companieData.add(company);
+            companies.add(company);
 
 
         }
 
         */
 
-   //     companieData = firmenverwaltungServiceClient.allCompanies();
+   //     companies = firmenverwaltungServiceClient.allCompanies();
 
-      //  model.addAttribute("companies", companieData);
-        return  "firmen";
+      //  model.addAttribute("companies", companies);
+
 
     }
 /*

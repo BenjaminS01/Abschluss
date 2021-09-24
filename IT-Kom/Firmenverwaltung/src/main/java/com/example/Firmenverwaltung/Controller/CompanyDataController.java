@@ -77,7 +77,7 @@ public class CompanyDataController {
     @ResponseBody
     public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
 
-        Thread.sleep(4000);
+        Thread.sleep(1100);
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDataList);

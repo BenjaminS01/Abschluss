@@ -42,7 +42,7 @@
     </thead>
     <tbody>
     <tr th:if="${companies.empty}">
-        <td colspan="2"> No Books Available </td>
+        <td colspan="2"> Service ist nicht verfügbar </td>
     </tr>
     <tr th:each="company : ${companies}">
         <td><span th:text="${company.companyName}"> Title </span></td>
