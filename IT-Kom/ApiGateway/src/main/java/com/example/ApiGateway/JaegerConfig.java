@@ -1,4 +1,4 @@
-package com.example.Besucher;
+package com.example.ApiGateway;
 
 import io.jaegertracing.internal.JaegerTracer;
 import io.jaegertracing.internal.samplers.ConstSampler;
@@ -9,11 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class JaegerConfig {
-
-    @Bean
-    public WebClient webClient() {
-        return WebClient.create();
-    }
 
     @Bean
     public JaegerTracer jaegerTracer() {
