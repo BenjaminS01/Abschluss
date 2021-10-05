@@ -1,0 +1,6 @@
+
+
+FROM openjdk:8-jdk-alpine
+COPY target/Besucher-0.0.1-SNAPSHOT.jar Besucherservice.jar
+ENTRYPOINT ["java","-jar","/Besucherservice.jar"]
+

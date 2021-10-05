@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
                 .antMatchers("/**").permitAll()
+            //    .antMatchers("http://localhost:8081/firmenverwaltung/allCompanies").permitAll()
                 .antMatchers("http://localhost:8081/firmenverwaltung/allCompanies").permitAll()
-
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }
