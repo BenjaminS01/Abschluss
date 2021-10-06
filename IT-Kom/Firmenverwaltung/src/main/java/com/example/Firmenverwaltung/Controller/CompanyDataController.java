@@ -52,11 +52,28 @@ public class CompanyDataController {
         String id = jwt.getSubject();
 
         CompanyData companyData = new CompanyData();
-        companyData.setCompanyName("Firma1");
+        companyData.setCompanyName("Firma 1");
         companyData.setLogoPath("/pfad/");
         companyData.setTakesPart(false);
-        companyData.setSubject(id);
+        companyData.setUrl("www.firma_1.de");
+        companyData.setSubject("1");
         companyDataRepository.save(companyData);
+
+        CompanyData companyData2 = new CompanyData();
+        companyData2.setCompanyName("Firma 2");
+        companyData2.setLogoPath("/pfad/");
+        companyData2.setTakesPart(false);
+        companyData2.setUrl("www.firma_2.de");
+        companyData2.setSubject("2");
+        companyDataRepository.save(companyData2);
+
+        CompanyData companyData3 = new CompanyData();
+        companyData3.setCompanyName("Firma 3");
+        companyData3.setLogoPath("/pfad/");
+        companyData3.setTakesPart(false);
+        companyData3.setUrl("www.firma_3.de");
+        companyData3.setSubject("3");
+        companyDataRepository.save(companyData3);
 
         return "company created";
 
@@ -77,7 +94,7 @@ public class CompanyDataController {
     @ResponseBody
     public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
 
-        Thread.sleep(1100);
+      //  Thread.sleep(1100);
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDataList);

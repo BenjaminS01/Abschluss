@@ -17,6 +17,7 @@ public class CompanyData {
     private String companyName;
     private boolean takesPart;
     private String logoPath;
+    private String url;
 
     public Long getId() {
         return id;
@@ -56,5 +57,13 @@ public class CompanyData {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

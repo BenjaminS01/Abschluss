@@ -5,6 +5,7 @@ public class CompanyData {
     private String companyName;
     private String takesPart;
     private String logoPath;
+    private String url;
 
 
     public String getCompanyName() {
@@ -29,5 +30,13 @@ public class CompanyData {
 
     public void setLogoPath(String logoPath) {
         this.logoPath = logoPath;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

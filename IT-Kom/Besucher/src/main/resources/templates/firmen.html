@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firmenverwaltung</title>
+
+    <title>Firmen</title>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,6 +19,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/ai-it-kom">Start <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/ai-it-kom">Messestammdaten</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/ai-it-kom/firmen">Firmen</a>
             </li>
@@ -25,35 +29,33 @@
                 <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/vorträge}">Vorträge</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/}">Firmenverwaltung</a>
+                <a class="nav-link" th:href="@{http://localhost:8081/firmenverwaltung/}">Login (Intern)</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<h1>Firmen</h1>
+<h1>Teilnehmende Firmen für die Messe</h1>
 
-<table>
-    <thead>
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${companies.empty}">
+
+<div class="col-sm-3" >
+
+    <table class="table" th:if="${companies.empty}">
         <td colspan="2"> Service ist nicht verfügbar </td>
-    </tr>
-    <tr th:each="company : ${companies}">
-        <td><span th:text="${company.companyName}"> Title </span></td>
-        <td><span th:text="${company.takesPart}"> Author </span></td>
-        <td><span th:text="${company.logoPath}"> Author </span></td>
+    </table>
 
-    </tr>
-    </tbody>
-</table>
+    <table class="table" th:each="company : ${companies}">
+        <tbody>
+        <tr >
+            <td >Firmenname:</td><td th:text="${company.companyName}" ></td>
+        </tr>
+        <tr>
+            <td >Webseite:</td><td th:text="${company.url}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-
+</div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script></body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
