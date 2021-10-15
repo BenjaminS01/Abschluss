@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         security.authorizeRequests()
                 .antMatchers("/**").permitAll()
             //    .antMatchers("http://localhost:8081/firmenverwaltung/allCompanies").permitAll()
-                .antMatchers("http://localhost:8081/firmenverwaltung/allCompanies").permitAll()
+                .antMatchers("http://localhost:8081/firmenservice/allCompanies").permitAll()
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
     }

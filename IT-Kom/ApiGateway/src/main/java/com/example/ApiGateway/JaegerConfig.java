@@ -13,7 +13,7 @@ public class JaegerConfig {
     @Bean
     public JaegerTracer jaegerTracer() {
 
-        return new io.jaegertracing.Configuration("Besucher")
+        return new io.jaegertracing.Configuration("ApiGateway")
                 .withSampler(new io.jaegertracing.Configuration.SamplerConfiguration().withType(ConstSampler.TYPE)
                         .withParam(1))
                 .withReporter(new io.jaegertracing.Configuration.ReporterConfiguration().withLogSpans(true))

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4Iq+5s3Nc1qj3r29Kqp4DRjx7O88y712QKDHEXHXNXpxBkEUXAgZgyNS5DXL7qJ4yt4wXcxMaPk4zZZhLjxG8A==",
+  "dgSpecHash": "TTLnn9jl8NFVO2MS8mmB/4YqMUI2OJpv2nwFyuvjvIea4VcOMPyT47CqGcv8Y9usOQGqByWj+BMCf1SKWkR/Vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
+  "projectFilePath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\Abschluss\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bswar\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\bswar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

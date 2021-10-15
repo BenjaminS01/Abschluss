@@ -6786,11 +6786,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
+      "projectUniqueName": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\Abschluss\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
       "projectName": "Newsletter",
-      "projectPath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
+      "projectPath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\Abschluss\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\Newsletter.csproj",
       "packagesPath": "C:\\Users\\bswar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\obj\\",
+      "outputPath": "C:\\Users\\bswar\\Desktop\\Bachelorarbeit\\Abschluss\\IT-Kom\\Newsletter\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bswar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6884,7 +6884,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

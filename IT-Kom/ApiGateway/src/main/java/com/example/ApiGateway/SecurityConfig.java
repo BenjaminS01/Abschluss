@@ -15,10 +15,10 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.authorizeExchange()
-                .pathMatchers("/ai-it-kom/**").permitAll()
-                .pathMatchers("/firmenverwaltung/").authenticated()
-                .pathMatchers("/firmenverwaltung/create").authenticated()
-                .pathMatchers("/firmenverwaltung/allCompanies").permitAll()
+                .pathMatchers("/besucherservice/**").permitAll()
+                .pathMatchers("/firmenservice/").authenticated()
+                .pathMatchers("/firmenservice/create").authenticated()
+                .pathMatchers("/firmenservice/allCompanies").permitAll()
 
                 .and()
                 .oauth2Login(withDefaults())

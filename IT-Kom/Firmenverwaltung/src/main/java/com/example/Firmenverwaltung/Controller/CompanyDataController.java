@@ -5,6 +5,7 @@ import com.example.Firmenverwaltung.Repository.CompanyDataRepository;
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class CompanyDataController {
 
     @Autowired
     CompanyDataRepository companyDataRepository;
+
+    @Autowired
+    EurekaInstanceConfigBean eurekaInstanceConfigBean;
 
 
     @PreAuthorize("hasAuthority('SCOPE_TEST')")
@@ -95,6 +99,9 @@ public class CompanyDataController {
     public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
 
       //  Thread.sleep(1100);
+
+        System.out.println(eurekaInstanceConfigBean.getInstanceId());
+
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(companyDataList);
