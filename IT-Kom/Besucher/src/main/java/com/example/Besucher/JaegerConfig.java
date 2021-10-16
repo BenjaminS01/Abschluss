@@ -1,5 +1,6 @@
 package com.example.Besucher;
 
+import feign.Client;
 import io.jaegertracing.internal.JaegerTracer;
 import io.jaegertracing.internal.samplers.ConstSampler;
 import org.springframework.context.annotation.Bean;
@@ -24,4 +25,5 @@ public class JaegerConfig {
                 .withReporter(new io.jaegertracing.Configuration.ReporterConfiguration().withLogSpans(true))
                 .getTracer();
     }
+
 }

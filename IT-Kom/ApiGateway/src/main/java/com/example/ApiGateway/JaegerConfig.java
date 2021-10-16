@@ -19,4 +19,5 @@ public class JaegerConfig {
                 .withReporter(new io.jaegertracing.Configuration.ReporterConfiguration().withLogSpans(true))
                 .getTracer();
     }
+
 }

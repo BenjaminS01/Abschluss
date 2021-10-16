@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(name="firmenverwaltung")
+@FeignClient(name="firmenservice")
 public interface FirmenverwaltungServiceClient {
 
   @GetMapping("/allCompanies")
