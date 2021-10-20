@@ -75,7 +75,6 @@ public class guestController {
         List<CompanyData> finalCompanieData = companies;
         companies = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
 
-
  */
 
 
@@ -95,7 +94,7 @@ public class guestController {
         Supplier<List<CompanyData>> decoratedCompanyDataSupplier =
                 circuitBreaker.decorateSupplier(companyDataSupplier);
 
-      //  for (int i = 1; i < 11; i++){
+        for (int i = 1; i < 11; i++){
            try {
 
                 companies = decoratedCompanyDataSupplier.get();
@@ -106,9 +105,9 @@ public class guestController {
                 System.out.println(e.getMessage());
                 companies.clear();
 
-       //         break;
+                break;
             }
-   //     }
+        }
         model.addAttribute("companies", companies);
         return  "firmen";
 
