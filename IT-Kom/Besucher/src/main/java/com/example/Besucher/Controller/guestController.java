@@ -61,7 +61,7 @@ public class guestController {
     }
 
     @GetMapping("/firmen")
-    public String companies(Model model) throws JSONException {
+    public String allCompanies(Model model) throws JSONException {
 
 
         List<CompanyData> companies = new ArrayList<>();
@@ -94,19 +94,19 @@ public class guestController {
         Supplier<List<CompanyData>> decoratedCompanyDataSupplier =
                 circuitBreaker.decorateSupplier(companyDataSupplier);
 
-        for (int i = 1; i < 11; i++){
+     //   for (int i = 1; i < 11; i++){
            try {
 
                 companies = decoratedCompanyDataSupplier.get();
-                System.out.println(companies.get(0).getCompanyName());
+       //         System.out.println(companies.get(0).getCompanyName());
 
             } catch (CallNotPermittedException e) {
 
-                System.out.println(e.getMessage());
+      //          System.out.println(e.getMessage());
                 companies.clear();
 
             }
-        }
+     //  }
         model.addAttribute("companies", companies);
         return  "firmen";
 

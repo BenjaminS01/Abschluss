@@ -98,7 +98,7 @@ public class CompanyDataController {
     @ResponseBody
     public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
 
-        Thread.sleep(1100);
+       // Thread.sleep(1100);
 
         System.out.println(eurekaInstanceConfigBean.getInstanceId());
 
