@@ -105,7 +105,6 @@ public class guestController {
                 System.out.println(e.getMessage());
                 companies.clear();
 
-                break;
             }
         }
         model.addAttribute("companies", companies);
