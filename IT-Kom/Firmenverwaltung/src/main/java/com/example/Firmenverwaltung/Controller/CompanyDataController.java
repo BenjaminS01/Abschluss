@@ -104,7 +104,7 @@ public class CompanyDataController {
 
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyDataList);
+        return ResponseEntity.status(HttpStatus.OK).body(companyDataList);
 
     }
 }
