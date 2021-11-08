@@ -12,12 +12,12 @@ namespace Newsletter.Controllers
 
 
         [HttpGet]
-        [Route("/place")]
+        [Route("/test")]
         public  string Get()
         {
            
 
-            return "blabla";
+            return "test";
         }
     }
 }

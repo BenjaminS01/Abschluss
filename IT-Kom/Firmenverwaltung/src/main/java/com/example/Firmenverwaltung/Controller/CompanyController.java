@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+
+// Gibt die Startseite des Firmenverwaltungsbereiches zurück (für Rolle Firma)
 @Controller
 public class CompanyController {
 

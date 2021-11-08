@@ -28,31 +28,26 @@ public class CompanyDataController {
     @Autowired
     CompanyDataRepository companyDataRepository;
 
-    @Autowired
-    EurekaInstanceConfigBean eurekaInstanceConfigBean;
-
 
     @PreAuthorize("hasAuthority('SCOPE_TEST')")
     @GetMapping("/create")
     @ResponseBody
     public String create(@AuthenticationPrincipal Jwt jwt) {
 
-       Map x = jwt.getClaims();
-        JSONObject z  = (JSONObject) x.get("realm_access");
-        JSONArray lll = (JSONArray) z.get("roles");
 
+       //erhalte die Rollen des Nutzers
+       Map claims = jwt.getClaims();
+       JSONObject realm_access  = (JSONObject) claims.get("realm_access");
+       JSONArray roles = (JSONArray) realm_access.get("roles");
 
+        //Prüft Autorisierung
+        if(!roles.contains("Firma")){
+            return "keine Berechtigung";
+        }
 
-        int i =1;
-     // Collection<String> z = x.values();
+        //Anlegen von Testdatensätzen
 
-
-      if(!lll.contains("Firma")){
-          return "keine Berechtigung";
-      }
-
-
-     //  JSONObject y = (JSONObject) x.get("realm_acces");
+        // erhalte NutzerId
         String id = jwt.getSubject();
 
         CompanyData companyData = new CompanyData();
@@ -60,7 +55,7 @@ public class CompanyDataController {
         companyData.setLogoPath("/pfad/");
         companyData.setTakesPart(false);
         companyData.setUrl("www.firma_1.de");
-        companyData.setSubject("1");
+        companyData.setSubject(id);
         companyDataRepository.save(companyData);
 
         CompanyData companyData2 = new CompanyData();
@@ -83,6 +78,7 @@ public class CompanyDataController {
 
     }
 
+    // Gibt die Firmendaten zu dem entsprechenden Firmenaccount zurück
     @GetMapping("/company")
     @ResponseBody
     public ResponseEntity  <List<CompanyData>> company(@AuthenticationPrincipal Jwt jwt) {
@@ -94,14 +90,12 @@ public class CompanyDataController {
 
     }
 
+
     @GetMapping("/allCompanies")
     @ResponseBody
     public ResponseEntity <List<CompanyData>> allCompanies() throws InterruptedException {
 
-       // Thread.sleep(1100);
-
-        System.out.println(eurekaInstanceConfigBean.getInstanceId());
-
+       // Thread.sleep(1100);    // Test des Circuit Breakers
 
         List<CompanyData> companyDataList = companyDataRepository.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(companyDataList);

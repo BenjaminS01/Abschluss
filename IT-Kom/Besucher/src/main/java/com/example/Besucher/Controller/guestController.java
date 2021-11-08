@@ -43,39 +43,30 @@ public class guestController {
     @Autowired
     FirmenverwaltungServiceClient firmenverwaltungServiceClient;
 
-   // @Autowired
-    //@LoadBalanced
-    //RestTemplate restTemplate;
 
     private static final String API_URL = "http://localhost:8081";
 
-
-
-
+    //Startseite
     @GetMapping("/")
     public String  home(Model model) {
-
 
         return  "start";
 
     }
 
+    @GetMapping("/vorträge")
+    public String presentation(Model model) {
+
+        return  "vorträge";
+
+    }
+
+    // Firmenübersicht
     @GetMapping("/firmen")
     public String allCompanies(Model model) throws JSONException {
 
 
         List<CompanyData> companies = new ArrayList<>();
-
-
-
-/*
-        Resilience4JCircuitBreaker circuitBreaker = circuitBreakerFactory.create("inventory");
-        java.util.function.Supplier<List<CompanyData>> booleanSupplier = () -> firmenverwaltungServiceClient.allCompanies().stream().allMatch();
-
-        List<CompanyData> finalCompanieData = companies;
-        companies = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
-
- */
 
 
         CircuitBreakerConfig config = CircuitBreakerConfig.custom()
@@ -94,7 +85,7 @@ public class guestController {
         Supplier<List<CompanyData>> decoratedCompanyDataSupplier =
                 circuitBreaker.decorateSupplier(companyDataSupplier);
 
-     //   for (int i = 1; i < 11; i++){
+     //   for (int i = 1; i < 11; i++){     // Test des Circuit Breakers
            try {
 
                 companies = decoratedCompanyDataSupplier.get();
@@ -110,104 +101,6 @@ public class guestController {
         model.addAttribute("companies", companies);
         return  "firmen";
 
-     /*   Supplier<String> decoratedSupplier = CircuitBreaker
-                .decorateSupplier(circuitBreaker, test(model));
-
-        String result = Try.ofSupplier(decoratedSupplier)
-                .recover(throwable -> "Hello from Recovery").get();
-
-
-      */
-
-       // companies = new ArrayList<>();
-
-
-
-
-       /*
-        String companiesStr = getCompanies();
-        if(companiesStr == null){
-            model.addAttribute("companies", companies);
-            return "firmen";
-        }
-        JSONArray companiesArray = new JSONArray(companiesStr);
-
-        for(int i=0; i < companiesArray.length(); i++)
-        {
-            JSONObject object = companiesArray.getJSONObject(i);
-
-            CompanyData company = new CompanyData();
-            company.setCompanyName(object.getString("companyName"));
-            company.setTakesPart(object.getString("takesPart"));
-            company.setLogoPath(object.getString("logoPath"));
-
-            companies.add(company);
-
-
-        }
-
-        */
-
-   //     companies = firmenverwaltungServiceClient.allCompanies();
-
-      //  model.addAttribute("companies", companies);
-
-
-    }
-/*
-    private String getCompanies( )
-    {
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        Cookie[] session = attr.getRequest().getCookies();
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("cookie", "SESSION="+session[0].getValue());
-
-
-      //
-        HttpEntity<String> entity = new HttpEntity<String>("access_token",headers);
-
-        final String uri = "http://localhost:8081/firmenverwaltung/allCompanies";
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<String> response = null;
-
-        response = getRestTemplate().exchange(uri, HttpMethod.GET, entity, String.class);
-
-        try {
-
-        }
-        catch(Exception e){
-            return null;
-        }
-
-        return response.getBody().toString();
-    }
-
-    @Bean
-    @LoadBalanced
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
-
-
- */
-
-    List<CompanyData> test(Model model){
-
-        List<CompanyData> _companieData = firmenverwaltungServiceClient.allCompanies();
-
-        model.addAttribute("companies", _companieData);
-
-        return _companieData;
-    }
-
-    private List<CompanyData> handleErrorCase() {
-        List<CompanyData> companieData2 = null;
-        return companieData2;
     }
 
 }

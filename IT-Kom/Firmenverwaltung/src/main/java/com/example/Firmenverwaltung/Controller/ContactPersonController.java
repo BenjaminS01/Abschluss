@@ -14,19 +14,7 @@ public class ContactPersonController {
     @Autowired
     ContactPersonRepository contactPersonRepository;
 */
-    @GetMapping("/test/check")
-    public String blubb() {
 
-        return "alleFirmen";
-
-    }
-
-    @GetMapping("/alleFirmen")
-    public String blubbb() {
-
-        return "alleFirmen";
-
-    }
 
 }
 

@@ -9,13 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/vortrag")
 public class PresentationController {
 
-    @GetMapping("/abc")
-    @ResponseBody
-    public String test() {
-
-        return "test123";
-
-    }
 
     @GetMapping("/neuerVortrag")
     @ResponseBody

@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Besucher" />
         <module name="Vortragsverwaltung" />
-        <module name="Accountverwaltung" />
         <module name="DiscoveryService" />
         <module name="Firmenverwaltung" />
         <module name="ApiGateway" />
