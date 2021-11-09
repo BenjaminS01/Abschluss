@@ -91,7 +91,7 @@ public class guestController {
                 companies = decoratedCompanyDataSupplier.get();
        //         System.out.println(companies.get(0).getCompanyName());
 
-            } catch (CallNotPermittedException e) {
+            } catch (Exception e) {
 
       //          System.out.println(e.getMessage());
                 companies.clear();

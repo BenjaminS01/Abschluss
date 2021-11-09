@@ -27,9 +27,13 @@ public class CompanyController {
 
         List<CompanyData> companyDataList = companyDataRepository.findBySubject(id);
 
-        CompanyData companyData = companyDataList.get(0);
+        CompanyData companyData = new CompanyData();
+        companyData.setCompanyName("");
+        companyData.setUrl("");
 
-
+        if(!companyDataList.isEmpty()) {
+            companyData = companyDataList.get(0);
+        }
 
         model.addAttribute("company", companyData);
 
